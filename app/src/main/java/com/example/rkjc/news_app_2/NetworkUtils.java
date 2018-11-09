@@ -19,7 +19,7 @@ public class NetworkUtils {
     private final static String API_KEY = "e74a8ce162004128b12a057ea2734c0b";
     private final static String PARAM_SORT_BY = "sortBy";
     private final static String SORT_BY = "latest";
-
+    //Creates the url to link to the API
     public static URL buildUrl () {
         Uri builtUri = Uri.parse(NEWS_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_QUERY, QUERY)
@@ -35,6 +35,7 @@ public class NetworkUtils {
         Log.d("Built URI: ", url.toString());
         return url;
     }
+    //Connects to the url created
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

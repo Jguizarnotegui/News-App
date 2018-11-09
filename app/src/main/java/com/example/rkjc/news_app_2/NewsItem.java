@@ -1,13 +1,14 @@
 package com.example.rkjc.news_app_2;
 
 public class NewsItem {
+    //The fields included in the API
     private String author;
     private String title;
     private String description;
     private String url;
     private String urlToImage;
     private String publishedAt;
-
+    //Constructor
     public NewsItem(String author,String title, String description, String url, String urlToImage, String publishedAt) {
         this.author = author;
         this.title = title;
@@ -16,6 +17,7 @@ public class NewsItem {
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
     }
+    //Setters and Getters
     public String getAuthor() {
         return author;
     }

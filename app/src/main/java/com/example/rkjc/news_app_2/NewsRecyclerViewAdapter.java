@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
 public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsViewHolder> {
     private ArrayList<NewsItem> newsArticle;
     final private ListItemClickListener mListItemClickListener;
@@ -25,20 +24,22 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
     public interface ListItemClickListener {
         void onListItemClick(int clickedArticle);
     }
+    //Creates the view holder
     @Override
-    public NewsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public NewsViewHolder onCreateViewHolder(ViewGroup viewGroup, int type) {
         Context context = viewGroup.getContext();
         int layoutListItems = R.layout.news_item;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
+        boolean attachToParent = false;
 
-        View view = inflater.inflate(layoutListItems, viewGroup, shouldAttachToParentImmediately);
+        View view = inflater.inflate(layoutListItems, viewGroup, attachToParent);
         NewsViewHolder viewHolder = new NewsViewHolder(view);
         return viewHolder;
     }
+    //Places the view holder into its position
     @Override
-    public void onBindViewHolder(NewsViewHolder newsViewHolder, int i) {
-        newsViewHolder.bind(i);
+    public void onBindViewHolder(NewsViewHolder newsViewHolder, int position) {
+        newsViewHolder.bind(position);
     }
     @Override
     public int getItemCount() {
@@ -48,7 +49,7 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
         TextView mTitle;
         TextView mDescription;
         TextView mPublishedAt;
-
+        // The view holder
         public NewsViewHolder(View newsView) {
             super(newsView);
             mTitle = (TextView) newsView.findViewById(R.id.na_articles_title);
@@ -57,11 +58,13 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
 
             newsView.setOnClickListener(this);
         }
+        //Links the content to the specific view for display
         void bind(int position) {
             mTitle.setText(newsArticle.get(position).getTitle());
             mDescription.setText("Description: " + newsArticle.get(position).getDescription());
             mPublishedAt.setText("Date Published: " + newsArticle.get(position).getPublishedAt());
         }
+        //Records which article has been clicked
         @Override
         public void onClick(View view) {
             int clickedArticlePosition = getAdapterPosition();

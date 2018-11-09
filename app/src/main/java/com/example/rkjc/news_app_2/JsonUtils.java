@@ -13,7 +13,7 @@ public class JsonUtils {
         try {
             JSONObject result = new JSONObject(Json);
             JSONArray articles = result.getJSONArray("articles");
-
+            //Populates the JasonArray with the results from the JsonObject
             for(int i = 0; i < articles.length(); i++) {
                 JSONObject article = articles.getJSONObject(i);
 
@@ -32,5 +32,3 @@ public class JsonUtils {
         return newsItems;
     }
 }
-
-
