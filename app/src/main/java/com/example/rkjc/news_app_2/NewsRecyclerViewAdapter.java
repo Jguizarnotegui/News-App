@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
             newsView.setOnClickListener(this);
         }
         void bind(int position) {
-            mTitle.setText("Title: " + newsArticle.get(position).getTitle());
+            mTitle.setText(newsArticle.get(position).getTitle());
             mDescription.setText("Description: " + newsArticle.get(position).getDescription());
             mPublishedAt.setText("Date Published: " + newsArticle.get(position).getPublishedAt());
         }
@@ -67,5 +68,4 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
             mListItemClickListener.onListItemClick(clickedArticlePosition);
         }
     }
-
 }
