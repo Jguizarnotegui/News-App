@@ -60,7 +60,7 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
         }
         //Links the content to the specific view for display
         void bind(int position) {
-            mTitle.setText(newsArticle.get(position).getTitle());
+            mTitle.setText("Title: " + newsArticle.get(position).getTitle());
             mDescription.setText("Description: " + newsArticle.get(position).getDescription());
             mPublishedAt.setText("Date Published: " + newsArticle.get(position).getPublishedAt());
         }
