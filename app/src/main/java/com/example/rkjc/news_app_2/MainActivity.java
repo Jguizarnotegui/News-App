@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.example.rkjc.news_app_2.Utils.ScheduleUtilities;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,14 +28,12 @@ public class MainActivity extends AppCompatActivity implements NewsRecyclerViewA
 
     // Member variable for the Database
     //private ArticleDatabase mDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //might go in other activity
         //mDb = ArticleDatabase.getDatabase(getApplicationContext());
-
         mNewsList = (RecyclerView) findViewById(R.id.news_recyclerview);
         mNewsItemViewModel = ViewModelProviders.of(this).get(NewsItemViewModel.class);
         final NewsRecyclerViewAdapter adapter = new NewsRecyclerViewAdapter(mNewsItemViewModel,MainActivity.this);
@@ -50,34 +49,35 @@ public class MainActivity extends AppCompatActivity implements NewsRecyclerViewA
         mNewsList.setLayoutManager(layoutManager);
         mNewsList.setHasFixedSize(true);
         //makeNewsQuery();
+        ScheduleUtilities.scheduleRefresh(this);
     }
-    //private void makeNewsQuery() {
-    //    URL newsSearchUrl = NetworkUtils.buildUrl();
-    //    new NewsQueryTask().execute(newsSearchUrl);
-    //}
-    //class NewsQueryTask extends AsyncTask<URL, Void, String> {
-    //    Connects to the url in the background thread
-    //    @Override
-    //    protected String doInBackground(URL... urls) {
-    //        URL searchUrl = urls[0];
-    //        String newsSearchResults = null;
-    //        try {
-    //            newsSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
-    //        } catch (IOException e) {
-    //            e.printStackTrace();
-    //        }
-    //        return newsSearchResults;
-    //    }
-    //          Organizes the Json data and displays in the recycler view using the adapter
-    //    @Override
-    //    protected void onPostExecute(String result) {
-    //        super.onPostExecute(result);
-    //        newsArticles = JsonUtils.parseNews(result);
-    //
-    //        mAdapter = new NewsRecyclerViewAdapter(newsArticles, MainActivity.this);
-    //        mNewsList.setAdapter(mAdapter);
-    //    }
-    //}
+    /*private void makeNewsQuery() {
+        URL newsSearchUrl = NetworkUtils.buildUrl();
+        new NewsQueryTask().execute(newsSearchUrl);
+    }
+    class NewsQueryTask extends AsyncTask<URL, Void, String> {
+        Connects to the url in the background thread
+        @Override
+        protected String doInBackground(URL... urls) {
+            URL searchUrl = urls[0];
+            String newsSearchResults = null;
+            try {
+                newsSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return newsSearchResults;
+        }
+              Organizes the Json data and displays in the recycler view using the adapter
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            newsArticles = JsonUtils.parseNews(result);
+
+            mAdapter = new NewsRecyclerViewAdapter(newsArticles, MainActivity.this);
+            mNewsList.setAdapter(mAdapter);
+        }
+    }*/
     //Creates the refresh button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

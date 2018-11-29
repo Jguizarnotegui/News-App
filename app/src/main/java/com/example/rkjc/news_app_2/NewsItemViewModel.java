@@ -19,10 +19,4 @@ public class NewsItemViewModel extends AndroidViewModel {
         return mAllNewsItems;
     }
     public void update() {mRepository.makeNewsSearchQuery();}
-    //public void insert(NewsItem newsItem) {
-    //    mRepository.insert(newsItem);
-    //}
-    //public void delete(NewsItem newsItem) {
-    //    mRepository.delete(newsItem);
-    //}
 }

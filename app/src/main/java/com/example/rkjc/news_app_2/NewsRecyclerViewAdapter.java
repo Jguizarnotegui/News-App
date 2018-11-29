@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
     private NewsItemViewModel mNewsItemViewModel;
 
     public NewsRecyclerViewAdapter(NewsItemViewModel mNewsItemViewModel, ListItemClickListener mListItemClickListener) {
-        this.newsArticle = newsArticle;
+        this.mNewsItemViewModel = mNewsItemViewModel;
         this.mListItemClickListener = mListItemClickListener;
     }
     public interface ListItemClickListener {
@@ -56,23 +57,30 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
         }
     }
     class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView mImageUrl;
         TextView mTitle;
         TextView mDescription;
         TextView mPublishedAt;
         // The view holder
         public NewsViewHolder(View newsView) {
             super(newsView);
+            mImageUrl = (ImageView) itemView.findViewById(R.id.na_articles_image);
             mTitle = (TextView) newsView.findViewById(R.id.na_articles_title);
             mDescription = (TextView) newsView.findViewById(R.id.na_articles_description);
-            mPublishedAt = (TextView) newsView.findViewById(R.id.na_articles_publishedAt);
+            //mPublishedAt = (TextView) newsView.findViewById(R.id.na_articles_publishedAt);
 
             newsView.setOnClickListener(this);
         }
         //Links the content to the specific view for display
         void bind(int position) {
-            mTitle.setText("Title: " + newsArticle.get(position).getTitle());
-            mDescription.setText("Description: " + newsArticle.get(position).getDescription());
-            mPublishedAt.setText("Date Published: " + newsArticle.get(position).getPublishedAt());
+            Uri urlImage = Uri.parse(newsArticle.get(position).getUrlToImage());
+
+            if(urlImage != null) {
+                Picasso.get().load(urlImage).into(mImageUrl);
+            }
+            mTitle.setText(newsArticle.get(position).getTitle());
+            mDescription.setText(newsArticle.get(position).getPublishedAt() + " . " + newsArticle.get(position).getDescription());
+            //mPublishedAt.setText("Date Published: " + newsArticle.get(position).getPublishedAt());
         }
         //Records which article has been clicked
         @Override

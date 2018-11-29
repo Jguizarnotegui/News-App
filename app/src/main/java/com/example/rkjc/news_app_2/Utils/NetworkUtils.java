@@ -1,7 +1,9 @@
-package com.example.rkjc.news_app_2;
+package com.example.rkjc.news_app_2.Utils;
 
 import android.net.Uri;
 import android.util.Log;
+
+import com.example.rkjc.news_app_2.BuildConfig;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -4,6 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.example.rkjc.news_app_2.Utils.JsonUtils;
+import com.example.rkjc.news_app_2.Utils.NetworkUtils;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -47,6 +50,7 @@ public class ArticleRepository {
         deleteAsyncTask(NewsItemDao dao) {
             mAsyncTaskDao = dao;
         }
+
         @Override
         protected Void doInBackground(final List<NewsItem>... params) {
             mAsyncTaskDao.deleteAll();
